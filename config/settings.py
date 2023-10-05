@@ -28,7 +28,11 @@ INSTALLED_APPS = [
     #custom apps
     'accounts',
     'pages',
+
+    'crispy_forms'
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -99,7 +103,16 @@ USE_I18N = True
 USE_TZ = True
 #endregion
 
+#region STATIC FILES & MEDIA
 STATIC_URL = 'static/'
+STATICFILES_DIRS = (str(BASE_DIR.joinpath('static')),)
+STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
+
+STATICFILES_FINDERS = [
+"django.contrib.staticfiles.finders.FileSystemFinder",
+"django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
+#endregion
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
