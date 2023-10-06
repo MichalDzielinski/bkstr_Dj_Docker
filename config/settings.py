@@ -1,4 +1,6 @@
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -7,12 +9,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-hn*=zljoup)6mcs*1n-c6d_%&^&9%a^0s3#f(@q-aoeqp)a0fp'
+load_dotenv()
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+DEBUG = os.environ.get('DEBUG')
+
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -72,7 +75,7 @@ MIDDLEWARE = [
 
 LOGIN_REDIRECT_URL='/'
 LOGOUT_REDIRECT_URL='/'
-LOGIN_URL='login'
+LOGIN_URL='account_login'
 
 ROOT_URLCONF = 'config.urls'
 
@@ -143,3 +146,7 @@ STATICFILES_FINDERS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+DEFAULT_FROM_EMAIL = 'admin@djangobookstore.com'
+
+ACCOUNT_EMAIL_VERIFICATION="mandatory"
