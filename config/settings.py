@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     
     'crispy_forms',
     'allauth', # new
@@ -36,12 +37,16 @@ INSTALLED_APPS = [
 
 ]
 
-SITE_ID = 1
+ACCOUNT_USERNAME_REQUIRED = False 
+ACCOUNT_AUTHENTICATION_METHOD = 'email' 
+ACCOUNT_EMAIL_REQUIRED = True 
+ACCOUNT_UNIQUE_EMAIL = True 
+
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-# config/settings.py
-# django-allauth config
+
 SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = (
