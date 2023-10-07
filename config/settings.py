@@ -154,4 +154,4 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 DEFAULT_FROM_EMAIL = 'admin@djangobookstore.com'
 
-ACCOUNT_EMAIL_VERIFICATION="mandatory"
+# ACCOUNT_EMAIL_VERIFICATION="mandatory"
