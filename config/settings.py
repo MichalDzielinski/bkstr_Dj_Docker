@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'allauth', # new
     'allauth.account', # new
+    'debug_toolbar',
 
     #custom apps
     'accounts',
@@ -63,6 +64,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_SESSION_REMEMBER = True
 
 MIDDLEWARE = [
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -72,7 +74,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     "allauth.account.middleware.AccountMiddleware",
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 604800
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
+
+
 
 LOGIN_REDIRECT_URL='/'
 LOGOUT_REDIRECT_URL='/'
@@ -148,6 +158,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = str(BASE_DIR.joinpath('media')) 
 #endregion
 
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
@@ -155,3 +166,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 DEFAULT_FROM_EMAIL = 'admin@djangobookstore.com'
 
 # ACCOUNT_EMAIL_VERIFICATION="mandatory"
+
+import socket
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
